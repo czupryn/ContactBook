@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Contact edit</h1>
+
+    {{ form(edit_form) }}
+    <a href="{{ path('address_newForContact', { 'contact_id': entity.id }) }}">add new address</a>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('contact') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

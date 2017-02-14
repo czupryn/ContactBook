@@ -1,0 +1,5 @@
+cl_contact_book:
+    resource: "@CLContactBookBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
