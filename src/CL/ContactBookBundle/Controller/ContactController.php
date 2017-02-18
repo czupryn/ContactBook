@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CL\ContactBookBundle\Entity\Contact;
 use CL\ContactBookBundle\Form\ContactType;
+use CL\ContactBookBundle\Entity\ContactRepository;
 
 /**
  * Contact controller.
@@ -111,6 +112,9 @@ class ContactController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CLContactBookBundle:Contact')->find($id);
+        $addresses= $entity->getAddresses();
+//        var_dump($addresses);
+//        die;
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Contact entity.');
@@ -121,6 +125,7 @@ class ContactController extends Controller
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+            'adresses' => $addresses,
         );
     }
 

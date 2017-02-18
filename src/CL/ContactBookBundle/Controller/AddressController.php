@@ -97,7 +97,7 @@ class AddressController extends Controller {
     }
 
     /**
-     * Displays a form to create a new Address entity.
+     * Displays a form to create a new Address entity for a specific contact provided in slug.
      *
      * @Route("/new/{contact_id}", name="address_newForContact")
      * 
@@ -115,8 +115,6 @@ class AddressController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $contact= $em->getRepository('CLContactBookBundle:Contact')->find($contact_id);
             $entity->setContact($contact);
-            
-//            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
@@ -130,7 +128,7 @@ class AddressController extends Controller {
     }
 
     private function createAddressForContactForm(Address $address, $url) {
-//needs corection should 
+
         
         $form = $this->createFormBuilder($address)
                 ->setAction($url)
@@ -168,6 +166,8 @@ class AddressController extends Controller {
         );
     }
 
+    
+    
     /**
      * Displays a form to edit an existing Address entity.
      *

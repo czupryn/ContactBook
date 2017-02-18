@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class ContactRepository extends EntityRepository {
-// własne zapytanie dql używane w controlerze do sortowania contaktów
+// my custom Dql query to sort contacts alphabetically
     public function findAllSort() {
         $em = $this->getEntityManager();
         $query = $em->createQuery(
@@ -20,6 +20,13 @@ class ContactRepository extends EntityRepository {
                 ORDER BY c.name ASC');
         $contacts= $query->getResult();
         return $contacts;
+    }
+    public function findContactwithAddress($id){
+        $em=$this->getEntityManager();
+        $query= $em->createQuery(
+                "SELECT c FROM CLContactBookBundle:Contact c WHERE c.id = $id"
+                );
+        return $query->getResult();
     }
 
 }
