@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/czoper/Workspace/ContactBook/src/CL/ContactBookBundle/Entity/Contact.php</file>
+            <file>file:/home/czoper/Workspace/ContactBook/src/CL/ContactBookBundle/Resources/views/Address/addressList.html.twig</file>
             <file>file:/home/czoper/Workspace/ContactBook/src/CL/ContactBookBundle/Resources/views/Contact/show.html.twig</file>
+            <file>file:/home/czoper/Workspace/ContactBook/src/CL/ContactBookBundle/Controller/ContactController.php</file>
+            <file>file:/home/czoper/Workspace/ContactBook/src/CL/ContactBookBundle/Resources/views/Address/newForContact.html.twig</file>
             <file>file:/home/czoper/Workspace/ContactBook/src/CL/ContactBookBundle/Controller/AddressController.php</file>
+            <file>file:/home/czoper/Workspace/ContactBook/src/CL/ContactBookBundle/Resources/views/Address/index.html.twig</file>
         </group>
     </open-files>
 </project-private>

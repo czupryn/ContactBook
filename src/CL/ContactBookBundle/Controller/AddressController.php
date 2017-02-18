@@ -31,7 +31,7 @@ class AddressController extends Controller {
         $entities = $em->getRepository('CLContactBookBundle:Address')->findAll();
 
         return array(
-            'entities' => $entities,
+            'addresses' => $entities,
         );
     }
 
@@ -110,10 +110,10 @@ class AddressController extends Controller {
         $form = $this->createAddressForContactForm($entity, $url);
 
         $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $contact= $em->getRepository('CLContactBookBundle:Contact')->find($contact_id);
         if($form->isSubmitted()){
             $entity=$form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $contact= $em->getRepository('CLContactBookBundle:Contact')->find($contact_id);
             $entity->setContact($contact);
             $em->persist($entity);
             $em->flush();
@@ -121,7 +121,7 @@ class AddressController extends Controller {
             return $this->redirect($this->generateUrl('address'));
         }
         return array(
-            'entity' => $entity,
+            'entity' => $contact,
             'form' => $form->createView(),
             'contact_id' => $contact_id,
         );

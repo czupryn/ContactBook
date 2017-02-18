@@ -16,8 +16,7 @@ use CL\ContactBookBundle\Entity\ContactRepository;
  *
  * @Route("/contact")
  */
-class ContactController extends Controller
-{
+class ContactController extends Controller {
 
     /**
      * Lists all Contact entities.
@@ -26,8 +25,7 @@ class ContactController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('CLContactBookBundle:Contact')->findAll();
@@ -36,6 +34,7 @@ class ContactController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Contact entity.
      *
@@ -43,8 +42,7 @@ class ContactController extends Controller
      * @Method("POST")
      * @Template("CLContactBookBundle:Contact:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Contact();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -59,7 +57,7 @@ class ContactController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -70,8 +68,7 @@ class ContactController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Contact $entity)
-    {
+    private function createCreateForm(Contact $entity) {
         $form = $this->createForm(new ContactType(), $entity, array(
             'action' => $this->generateUrl('contact_create'),
             'method' => 'POST',
@@ -89,14 +86,13 @@ class ContactController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Contact();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -107,14 +103,12 @@ class ContactController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CLContactBookBundle:Contact')->find($id);
-        $addresses= $entity->getAddresses();
-//        var_dump($addresses);
-//        die;
+        $addresses = $entity->getAddresses();
+        
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Contact entity.');
@@ -123,9 +117,9 @@ class ContactController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
-            'adresses' => $addresses,
+            'addresses' => $addresses,
         );
     }
 
@@ -136,8 +130,7 @@ class ContactController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CLContactBookBundle:Contact')->find($id);
@@ -150,21 +143,20 @@ class ContactController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Contact entity.
-    *
-    * @param Contact $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Contact $entity)
-    {
+     * Creates a form to edit a Contact entity.
+     *
+     * @param Contact $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Contact $entity) {
         $form = $this->createForm(new ContactType(), $entity, array(
             'action' => $this->generateUrl('contact_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -174,6 +166,7 @@ class ContactController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Contact entity.
      *
@@ -181,8 +174,7 @@ class ContactController extends Controller
      * @Method("PUT")
      * @Template("CLContactBookBundle:Contact:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CLContactBookBundle:Contact')->find($id);
@@ -202,19 +194,19 @@ class ContactController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Contact entity.
      *
      * @Route("/{id}", name="contact_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -240,13 +232,13 @@ class ContactController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('contact_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('contact_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
 }

@@ -21,12 +21,5 @@ class ContactRepository extends EntityRepository {
         $contacts= $query->getResult();
         return $contacts;
     }
-    public function findContactwithAddress($id){
-        $em=$this->getEntityManager();
-        $query= $em->createQuery(
-                "SELECT c FROM CLContactBookBundle:Contact c WHERE c.id = $id"
-                );
-        return $query->getResult();
-    }
 
 }
